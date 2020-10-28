@@ -28,3 +28,13 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/ocphandle-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
+
+## Pushing to OCP
+
+You need to pre-login onto a cluster so that the kubeconfig is correct, and be in the namespace you want to deploy to. Then:
+
+./mvnw clean package -Dquarkus.container-image.build=true -Dquarkus.kubernetes.deploy=true -Dquarkus.openshift.expose=true -Dquarkus.kubernetes-client.trust-certs=true
+
+For a native build use:
+
+mvn clean package -Dnative -Dquarkus.kubernetes.deploy=true -Dquarkus.native.container-build=true -Dquarkus.native.builder-image=registry.access.redhat.com/quarkus/mandrel-20-rhel8:20.1 -Dquarkus.openshift.expose=true -Dquarkus.kubernetes-client.trust-certs=true
