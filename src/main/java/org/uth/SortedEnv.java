@@ -14,21 +14,20 @@ public class SortedEnv
   @Produces(MediaType.TEXT_PLAIN)
   public String sortedEnvs()
   {
-    long start = System.currentTimeMillis();
+    final long start = System.currentTimeMillis();
 
-    Map<String,String> envs = System.getenv();
-    String[] sortedList = new String[envs.keySet().size()];
+    final Map<String, String> envs = System.getenv();
+    final String[] sortedList = new String[envs.keySet().size()];
 
     int pos = 0;
-    for( String envName : envs.keySet())
-    {
+    for (final String envName : envs.keySet()) {
       sortedList[pos] = envName;
       pos++;
     }
 
     Arrays.parallelSort(sortedList);
 
-    StringBuilder working = new StringBuilder();
+    final StringBuilder working = new StringBuilder();
 
     for( int loop = 0; loop < sortedList.length; loop++ )
     {
